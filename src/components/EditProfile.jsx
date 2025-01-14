@@ -19,7 +19,6 @@ const EditProfile = () => {
       }, 5000);
     }
   }, [success]);
-
   // Fetch user data
   const fetchUser = async () => {
     setLoading(true);
@@ -79,16 +78,6 @@ const EditProfile = () => {
           "Phone must be a standard Israeli phone number"
         )
         .required("Phone number is required"),
-      email: Yup.string()
-        .email("Invalid email address")
-        .required("Email is required"),
-      password: Yup.string()
-        .min(9, "Password must be at least 9 characters")
-        .matches(
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*-]).{9,}$/,
-          "Password must contain an uppercase letter, a lowercase letter, a number, and one of the following characters !@#$%^&*-"
-        )
-        .required("Password is required"),
       image: Yup.object({
         url: Yup.string()
           .url("Image URL must be a valid URL")
@@ -207,7 +196,7 @@ const EditProfile = () => {
             ))}
             <div className="edit-submit">
             <button type="submit" className="edit-submit-btn"
-            disabled={!formik.dirty || !formik.isValid}>
+            disabled={!formik.isValid}>
                 Save Changes
             </button>
             <button
