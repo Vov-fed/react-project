@@ -41,7 +41,7 @@ const likeCard = async (id) => {
 
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  const currentCards = cards.slice(indexOfFirstCard, indexOfLastCard);
+  const currentCards = cards.length > currentPage * cardsPerPage ? cards.slice(indexOfFirstCard, indexOfLastCard) : cards;
 
   const totalPages = Math.ceil(cards.length / cardsPerPage);
 
