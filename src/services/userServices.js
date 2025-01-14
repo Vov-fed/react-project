@@ -6,7 +6,7 @@ export const fetchMe = async () => {
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
-    url: 'https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/'+jwtDecode(localStorage.getItem('token'))._id,
+    url: 'https://cardsservice.onrender.com/users/'+jwtDecode(localStorage.getItem('token'))._id,
     headers: { 
       'x-auth-token': localStorage.getItem('token'),
     },
@@ -24,7 +24,7 @@ export const fetchAllCards = async () => {
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
-    url: 'https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards',
+    url: 'https://cardsservice.onrender.com/cards',
   };
   try {
     let response = await axios.request(config);
@@ -39,7 +39,7 @@ export const likeSomeCard = async (id) => {
   let config = {
     method: 'patch',
     maxBodyLength: Infinity,
-    url: `https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards/${id}`,
+    url: `https://cardsservice.onrender.com/cards/${id}`,
     headers: { 
       'x-auth-token': localStorage.getItem('token'),
     }
@@ -55,12 +55,11 @@ export const likeSomeCard = async (id) => {
   }
 }
 
-
 export const fetchAllLikedCards = async () => {
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
-    url: 'https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards/',
+    url: 'https://cardsservice.onrender.com/cards/',
   };
   try {
     let response = await axios.request(config);
@@ -76,7 +75,7 @@ export const fetchAllMyCards = async () => {
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
-    url: 'https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards/my-cards',
+    url: 'https://cardsservice.onrender.com/cards/my-cards',
     headers: { 
       'x-auth-token': localStorage.getItem('token'),
     },
@@ -94,7 +93,7 @@ export const getCardById = async (id) => {
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
-    url: `https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards/${id}`,
+    url: `https://cardsservice.onrender.com/cards/${id}`,
   };
   try {
     let response = await axios.request(config);
@@ -109,7 +108,7 @@ export const updateCard = async (id, values) => {
   let config = {
     method: 'put',
     maxBodyLength: Infinity,
-    url: `https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards/${id}`,
+    url: `https://cardsservice.onrender.com/${id}`,
     headers: { 
       'x-auth-token': localStorage.getItem('token'),
     },
@@ -127,7 +126,7 @@ export const createCard = async (values) => {
   let config = {
     method: 'post',
     maxBodyLength: Infinity,
-    url: 'https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards',
+    url: 'https://cardsservice.onrender.com/cards',
     headers: { 
       'x-auth-token': localStorage.getItem('token'),
     },
@@ -146,7 +145,7 @@ export const upadateUser = async (values) => {
   let config = {
     method: 'put',
     maxBodyLength: Infinity,
-    url: `https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/${jwtDecode(localStorage.getItem('token'))._id}`,
+    url: `https://cardsservice.onrender.com/users/${jwtDecode(localStorage.getItem('token'))._id}`,
     headers: { 
       'x-auth-token': localStorage.getItem('token'),
     },

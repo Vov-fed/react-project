@@ -100,7 +100,6 @@ const EditProfile = () => {
       try {
         await upadateUser(values);
         navigate("/success:editProfile");
-        window.location.reload();
       } catch {
         toast.error("Error updating profile");
       }
@@ -196,7 +195,11 @@ const EditProfile = () => {
             ))}
             <div className="edit-submit">
             <button type="submit" className="edit-submit-btn"
-            disabled={!formik.isValid}>
+            disabled={
+              !formik.dirty ||
+              !formik.isValid ||
+              formik.isSubmitting
+              }>
                 Save Changes
             </button>
             <button

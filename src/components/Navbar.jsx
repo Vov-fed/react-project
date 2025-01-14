@@ -1,19 +1,51 @@
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { fetchAllCards } from "../services/userServices";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [nightMode, setNightMode] = useState(false);
-
+  const [cards, setCards] = useState([]);
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const fetchCards = async () => {
+    try {
+      const response = await fetchAllCards();
+      setCards(response);
+    } catch (error) {
+      console.error("Error fetching cards:", error.response?.data || error.message);
+      alert("An error occurred while fetching the cards.");
+    }
+  };
+
+  useEffect(() => {
+    fetchCards();
+  }, []);
 
   const closeMenu = () => {
     setIsOpen(false);
   };
 
+
+
+
+  const searchCards = (search) => {
+    if(search === ""){
+      return
+    } else {
+      const filteredCards = cards.filter((card) => {
+        return card.name.toLowerCase().includes(search.toLowerCase());
+      }
+      );
+      setCards(filteredCards);
+      filteredCards.forEach((card) => {
+        console.log(card.key);
+      });
+    }
+  };
 
   useEffect(() => {
   if(localStorage.getItem("nightMode") === "true"){
@@ -98,6 +130,13 @@ function Navbar() {
         >
         <i className={`${!nightMode ? "fa-solid fa-moon forNight" : "fa-solid fa-sun forDay"}
         `}></i>
+        </li>
+        <li className="header-nav-item">
+          <input type="text" 
+          className="header-search"
+          placeholder="Search"
+          onChange={(e)=>{searchCards(e.target.value)}}
+          />
         </li>
       </ul>
       <div className={`burger ${isOpen ? "open" : ""}`} onClick={toggleMenu}>
