@@ -41,7 +41,7 @@ const likeCard = async (id) => {
 
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  const currentCards = cards.length > currentPage * cardsPerPage ? cards.slice(indexOfFirstCard, indexOfLastCard) : cards;
+  const currentCards = cards.slice(indexOfFirstCard, indexOfLastCard) : cards;
 
   const totalPages = Math.ceil(cards.length / cardsPerPage);
 
@@ -92,7 +92,7 @@ const likeCard = async (id) => {
                 </div>
                 <div className="card-date">
                   <i className="fa-solid fa-calendar"></i>
-                  <span className="card-created">{card?.createdAt.slice(0, 10).replace(/-/g, ".")}</span>
+                  <span className="card-created">{card.createAt.slice(0, 10).replace(/-/g, ".")}</span>
                 </div>
               </div>
               <div className="card-btn-wrapper">
