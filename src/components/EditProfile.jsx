@@ -133,7 +133,10 @@ const EditProfile = () => {
     { name: "address.houseNumber", placeholder: "House Number", type: "text" },
     { name: "address.zip", placeholder: "ZIP Code", type: "text" },
   ];
+<<<<<<< HEAD
   
+=======
+>>>>>>> fe41b82 (first commit)
   // Fetch user data on component mount
   useEffect(() => {
     fetchUser();
