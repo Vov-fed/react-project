@@ -67,7 +67,7 @@ const likeCard = async (id) => {
       </div>
       {loading ? (
         <div className="loading-wrapper">
-          <img className="loading" src="https://github.com/Vov-fed/react-project/blob/main/public/loading.png?raw=true" alt="Loading" />
+          <img className="loading" src="https://freeimage.host/i/26z3swXhttps://iili.io/26z3swX.png" alt="Loading" />
         </div>
       ) : currentCards.length > 0 ? (
         <div id="cards" className="cards">

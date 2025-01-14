@@ -69,7 +69,7 @@ function Navbar() {
       <ul className={`header-nav ${isOpen ? "open" : ""}`}>
         <li className="header-nav-item">
           <Link to="/" className="header-logo-link" onClick={closeMenu}>
-            <img className="header-logo" src="https://raw.githubusercontent.com/Vov-fed/react-project/8428721ed9e7d5e50b1d5897a0798ef225e78b98/public/logo.svg?token=BBCAAOURHSXNJ3H76JEXADDHQZ322" alt="logo" />
+            <img className="header-logo" src="https://raw.githubusercontent.com/Vov-fed/react-project/ae0a929da416e1b272abcf2f9bf1801e4615fe15/public/logo.svg?token=BBCAAOUF7GHDWVKW5XVUWRLHQ3MGA" alt="logo" />
           </Link>
         </li>
         <li className="header-nav-item">
