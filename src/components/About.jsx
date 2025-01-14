@@ -34,7 +34,7 @@ function About() {
           <div className="team-member">
             <img
               className="team-photo"
-              src="public/img/profile.jpeg"
+              src="public/profile.jpeg"
               alt="Team Member 1"
             />
             <h3 className="team-name">Vladimir Fedoruk</h3>
@@ -43,7 +43,7 @@ function About() {
           <div className="team-member">
             <img
               className="team-photo"
-              src="public/img/tima.jpg"
+              src="public/tima.jpg"
               alt="Team Member 2"
             />
             <h3 className="team-name">Tima Fedoruk</h3>
