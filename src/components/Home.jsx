@@ -67,7 +67,7 @@ const likeCard = async (id) => {
       </div>
       {loading ? (
         <div className="loading-wrapper">
-          <img className="loading" src="src/img/loading.png" alt="Loading" />
+          <img className="loading" src="public/img/loading.png" alt="Loading" />
         </div>
       ) : currentCards.length > 0 ? (
         <div id="cards" className="cards">
