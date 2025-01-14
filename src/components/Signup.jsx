@@ -67,7 +67,7 @@ function Register() {
     onSubmit: async (values) => {
       try {
         await axios.post(
-          "https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users",
+          "https://cardsservice.onrender.com/users",
           values
         );
         navigate("/success:register");

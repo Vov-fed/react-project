@@ -25,7 +25,7 @@ const Login = () => {
     onSubmit: async (values) => {
       try {
         const response = await axios.post(
-          "https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/login",
+          "https://cardsservice.onrender.com/users/login",
           { email: values.email, password: values.password }
         );
         localStorage.setItem("token", response.data);
