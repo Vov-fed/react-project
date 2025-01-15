@@ -108,8 +108,8 @@ export const updateCard = async (id, values) => {
   let config = {
     method: 'put',
     maxBodyLength: Infinity,
-    url: `https://cardsservice.onrender.com/${id}`,
-    headers: { 
+    url: `https://cardsservice.onrender.com/cards/${id}`,
+    headers: {
       'x-auth-token': localStorage.getItem('token'),
     },
     data: values,

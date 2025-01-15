@@ -34,7 +34,7 @@ function About() {
           <div className="team-member">
             <img
               className="team-photo"
-              src="https://github.com/Vov-fed/react-project/blob/main/public/profile.jpeg?raw=true"
+              src="https://images2.imgbox.com/b3/f3/qLMd0PUp_o.jpeg"
               alt="Team Member 1"
             />
             <h3 className="team-name">Vladimir Fedoruk</h3>
@@ -43,7 +43,7 @@ function About() {
           <div className="team-member">
             <img
               className="team-photo"
-              src="https://github.com/Vov-fed/react-project/blob/main/public/tima.jpg?raw=true"
+              src="https://images2.imgbox.com/14/f2/jlj80u6K_o.jpg"
               alt="Team Member 2"
             />
             <h3 className="team-name">Tima Fedoruk</h3>

@@ -78,7 +78,6 @@ const likeCard = async (id) => {
                 <div className="card-img-wrapper">
                   <img className="card-img" src={card.image.url} alt={card.title} />
                   <div className="card-img-overlay">
-                    <span className="card-category">{card.category || "Category"}</span>
                   </div>
                 </div>
                 <div className="card-content">

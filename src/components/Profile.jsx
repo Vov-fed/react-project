@@ -149,7 +149,6 @@ const Profile = () => {
                                       <div className="card-img-wrapper">
                   <img className="card-img" src={card.image.url} alt={card.title} />
                   <div className="card-img-overlay">
-                    <span className="card-category">{card.category || "Category"}</span>
                   </div>
                 </div>
                 <div className="card-content">
@@ -163,7 +162,7 @@ const Profile = () => {
                 </div>
                 <div className="card-date">
                   <i className="fa-solid fa-calendar"></i>
-                  <span className="card-created">{card.createdAt.slice(0, 10).replace(/-/g, ".")}</span>
+                  <span className="card-created">{card.createAt.slice(0, 10).replace(/-/g, ".")}</span>
                 </div>
               </div>
               <div className="card-btn-wrapper">
@@ -203,7 +202,6 @@ const Profile = () => {
                 <div className="card-img-wrapper">
                   <img className="card-img" src={card.image.url} alt={card.title} />
                   <div className="card-img-overlay">
-                    <span className="card-category">{card.category || "Category"}</span>
                   </div>
                 </div>
                 <div className="card-content">

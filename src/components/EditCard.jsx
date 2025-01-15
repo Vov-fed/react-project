@@ -75,7 +75,8 @@ function EditCard() {
                 localStorage.removeItem("cardId");
                 navigate("/success:editCard");
                 window.location.reload();
-            } catch {
+            } catch(error) {
+                console.error("Error updating card:", error.response?.data || error.message);
                 toast.error("Error updating card");
             }
         }
@@ -187,6 +188,7 @@ function EditCard() {
                         )}
                         {step === inputs.length - 1 && <button
                             className="btn-submit"
+                            onClick={formik.handleSubmit}
                             type="submit">Submit</button>}
                     </div>
                 </div>
