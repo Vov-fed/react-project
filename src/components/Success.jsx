@@ -26,10 +26,10 @@ function Success() {
       )}
       <div className="success-link-wrapper">
         <Link to="/" className="success-link">
-          Go to home
+        <i className="fa-solid fa-home"></i>
         </Link>
         <Link to="/profile" className="success-link">
-          Go to profile
+        <i className="fa-solid fa-user"></i>
         </Link>
       </div>
     </div>

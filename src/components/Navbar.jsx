@@ -1,15 +1,23 @@
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+
 import { fetchAllCards } from "../services/userServices";
+import { useSearch } from "../hooks/SearchContext";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [nightMode, setNightMode] = useState(false);
   const [cards, setCards] = useState([]);
+  const { setSearchQuery } = useSearch();
+
+
+  const navigate = useNavigate();
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
 
   const fetchCards = async () => {
     try {
@@ -30,23 +38,6 @@ function Navbar() {
   };
 
 
-
-
-  const searchCards = (search) => {
-    if(search === ""){
-      return
-    } else {
-      const filteredCards = cards.filter((card) => {
-        return card.name.toLowerCase().includes(search.toLowerCase());
-      }
-      );
-      setCards(filteredCards);
-      filteredCards.forEach((card) => {
-        console.log(card.key);
-      });
-    }
-  };
-
   useEffect(() => {
   if(localStorage.getItem("nightMode") === "true"){
     document.body.classList.add("night-mode");
@@ -63,7 +54,6 @@ function Navbar() {
     }
   }
   , [nightMode]);
-
   return (
     <header className="header">
       <ul className={`header-nav ${isOpen ? "open" : ""}`}>
@@ -131,11 +121,17 @@ function Navbar() {
         <i className={`${!nightMode ? "fa-solid fa-moon forNight" : "fa-solid fa-sun forDay"}
         `}></i>
         </li>
-        <li className="header-nav-item">
-          <input type="text" 
-          className="header-search"
-          placeholder="Search"
-          onChange={(e)=>{searchCards(e.target.value)}}
+        <li className="header-nav-item search-item">
+          <input
+            type="text"
+            className="header-search"
+            placeholder="Search"
+            onChange={ (e) => {
+              navigate("/");
+              const cards = document.querySelector("#cards");
+              cards.scrollIntoView({ behavior: "smooth" });
+              setSearchQuery(e.target.value);
+            }} // Update the global search query
           />
         </li>
       </ul>
@@ -143,6 +139,19 @@ function Navbar() {
         <span className="burger-line"></span>
         <span className="burger-line"></span>
         <span className="burger-line"></span>
+      </div>
+      <div className="search-small-screen">
+        <input
+          type="text"
+          className="header-search"
+          placeholder="Search"
+          onChange={(e) => {
+            navigate("/");
+            const cards = document.querySelector("#cards");
+            cards.scrollIntoView({ behavior: "smooth" });
+            setSearchQuery(e.target.value);
+          }} // Update the global search query
+        />
       </div>
     </header>
   );

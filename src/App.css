@@ -1631,7 +1631,7 @@ h3 {
 .register-button-submit {
   background-color: #28a745;
   color: white;
-  width: 100%;
+  width: 60%;
 }
 
 .register-button-back:hover {
@@ -1744,7 +1744,7 @@ h3 {
 
 .success-link-wrapper {
   display: flex;
-  width: 90%;
+  width: 50%;
   justify-content: space-between;
   margin: 0 auto;
   margin-top: 20px;
@@ -1759,6 +1759,15 @@ h3 {
   text-decoration: none;
   border-radius: 8px;
   transition: background-color 0.3s, transform 0.3s;
+}
+
+@media (max-width: 480px) {
+  .success-link-wrapper {
+    width: 80%;
+  }
+  .success-link {
+    padding: 10px 15px;
+  }
 }
 
 .success-link:hover {
@@ -1780,4 +1789,116 @@ h3 {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+
+
+
+/* General Search Styles */
+.header-search {
+  width: 100%;
+  max-width: 250px;
+  height: 35px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  padding: 0 10px;
+  border-radius: 5px;
+  outline: none;
+  transition: 0.3s ease;
+  background: #ffffff5b;
+  margin-left: auto;
+  color: var(--white);
+}
+
+.header-search:focus {
+  border-color: var(--input-focus-border-color);
+  box-shadow: 0 0 5px rgba(110, 142, 251, 0.5);
+}
+
+.header-search::placeholder {
+  color: var(--white);
+}
+
+/* Search in Night Mode */
+.night-mode .header-search {
+  border-color: #444;
+  background-color: #222;
+  color: #fff;
+}
+
+.night-mode .header-search::placeholder {
+  color: #666;
+}
+
+/* Responsive Styles */
+.search-small-screen {
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .search-small-screen {
+    display: block;
+  }
+  .search-item {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .header-search {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    margin: 10px 0;
+  }
+}
+
+
+.night-mode .register-button-back {
+  background-color: #444;
+  color: #fff;
+}
+
+.night-mode .register-button-next {
+  background-color: #6e8efb;
+  color: #fff;
+}
+
+.night-mode .register-button-submit {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.night-mode .register-button-back:hover {
+  background-color: #333;
+}
+
+
+.night-mode .register-button-next:hover {
+  background-color: #5c7cfb;
+}
+
+.night-mode .register-button-submit:hover {
+  background-color: #218838;
+}
+
+.night-mode .register-button-next:disabled {
+  background-color: #555;
+  color: #999;
+}
+
+
+
+.register-checkbox {
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.register-checkbox-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 43%;
 }

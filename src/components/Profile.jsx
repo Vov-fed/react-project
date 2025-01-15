@@ -14,8 +14,15 @@ const Profile = () => {
   const [myCards, setMyCards] = useState([]);
   const navigate = useNavigate();
 
+
+  
+  
   let success = localStorage.getItem("success") || null;
   useEffect(() => {
+    if(!localStorage.getItem("token")){
+      navigate("/login");
+      window.location.reload();
+    }
     if (success) {
       toast.success('oh yeah');
       setInterval(() => {

@@ -54,6 +54,7 @@ function Register() {
         url: Yup.string()
           .url("Image URL must be a standard URL")
           .required("Image URL is required"),
+          alt: Yup.string().required("Image alt is required"),
       }),
       address: Yup.object({
         zip: Yup.number().typeError("Please enter a number").required("ZIP code is required"),
@@ -114,6 +115,11 @@ function Register() {
       placeholder: "Image URL",
       type: "text",
     },
+    {
+      name: "image.alt",
+      placeholder: "Image Alt",
+      type: "text",
+    },
     ...Object.keys(formik.values.address).map((key) => ({
       name: `address.${key}`,
       placeholder: key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, " $1"),
@@ -151,11 +157,16 @@ function Register() {
         <h2 className="register-title">Sign Up</h2>
         {inputs.map((input, index) => (
           index === step && (
-            <div key={input.name} className="register-input-wrapper">
+            <div key={input.name} className={`register-input-wrapper ${input.type === "checkbox" ? "register-checkbox-wrapper" : ""}`}>
+              {input.type == "checkbox" && 
+                <label className="register-label">
+                  Are u a business?
+                </label>
+              }
               <input
                 className={`register-input ${
                   currentError ? "register-input-error" : ""
-                }`}
+                } ${input.type === "checkbox" ? "register-checkbox" : ""}`}
                 type={input.type}
                 name={input.name}
                 placeholder={input.placeholder}

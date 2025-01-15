@@ -36,6 +36,8 @@ function App() {
         <Route path="*" element={<NotFound />} />
         <Route path= "/editProfile" element={<EditProfile />} />
         <Route path = "/success:login" element={<Success />} />
+        <Route path = "/success:register" element={<Success />} />
+        <Route path = "/success:editProfile" element={<Success />} />
         <Route path = "/success:editCard" element={<Success />} />
         <Route path = "/success:card" element={<Success />} />
       </Routes>
