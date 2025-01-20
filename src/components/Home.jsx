@@ -1,9 +1,9 @@
-import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import { fetchAllCards, likeSomeCard } from "../services/userServices";
 import { useSearch } from "../hooks/SearchContext";
 import '../css/main.css';
+import { Link } from "react-router-dom";
 
 function Home() {
   const [cards, setCards] = useState([]);
@@ -127,9 +127,9 @@ function Home() {
                   </div>
                 </div>
                 <div className="card-btn-wrapper">
-                  <a href={`/cards/${card._id}`} className="card-btn primary-btn">
+                  <Link to={`/cards/${card._id}`} className="card-btn primary-btn">
                     Learn More...
-                  </a>
+                  </Link>
                   {localStorage.getItem("token") && (
                     <div className="card-like">
                       <i
