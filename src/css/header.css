@@ -1,0 +1,202 @@
+
+.header-nav-item .header-logo-link:hover{
+    background-color: transparent;
+}
+  .header-logo{
+    height: 3rem;
+    width: auto;
+}
+
+.night-mode-btn{
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.night-mode-btn i{
+  transition: all 0.2s ease;
+}
+
+.night-mode-btn:hover .forDay{
+  color: #ffff42;}
+.night-mode-btn:hover .forNight{
+  color: #827682;
+}
+.night-mode-btn:hover{
+  transform: translateY(-2px);
+}
+
+.header {
+    background: linear-gradient(135deg, var(--secondary-color), #3a1c71); /* Gradient background */
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 6px var(--shadow);
+    height: 60px;
+    z-index: 10;
+    color: var(--white);; /* Ensure text color is light for contrast */
+    position: fixed; /* Fixed position at the top of the viewport */
+    width: 100%;
+    top: 0;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+
+.header:hover {
+    background: linear-gradient(135deg, #6a5acd, #482779);
+    box-shadow: 0 6px 10px var(--card-hover-shadow);
+  }
+
+.header-nav {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0;
+    transition: all 0.3s ease;
+  }
+  .header-nav.open {
+    height: 50vh; /* Full height when open */
+    border-radius: 0 0 8px 8px; /* Rounded bottom edges */
+    animation: fadeIn 0.3s ease forwards;
+  }
+  
+  .header-nav-item a {
+    text-decoration: none;
+    color: var(--white);;
+    font-weight: 500;
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 100%; /* Make links span full width */
+    text-align: center; /* Center text */
+  }
+  .header-nav-item a:hover,
+  .header-nav-item a.active {
+    background-color: rgba(255, 255, 255, 0.2); /* Subtle hover effect */
+    color: var(--white);;
+  }
+  
+  /* Burger Menu */
+  .burger {
+    display: none;
+    flex-direction: column;
+    gap: 0.3rem;
+    cursor: pointer;
+    z-index: 20;
+  }
+  
+  .burger-line {
+    width: 30px;
+    height: 3px;
+    background-color: var(--white);;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .burger.open .burger-line:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+  
+  .burger.open .burger-line:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .burger.open .burger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .header-nav {
+    display: flex;
+    padding-left: 0;
+    flex-direction: column;
+    align-items: center;
+    height: 0vh;
+    opacity: 0;
+    overflow: hidden;
+    width: 100vw;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background: rgba(58, 28, 113, 0.95); /* Slightly darker background */
+    animation: fadeIn 0.3s ease forwards;
+    }
+  
+    .burger {
+      display: flex;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .header-nav.open {
+      padding: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .header-nav.open {
+      padding: 0.5rem;
+    }
+  
+    .burger-line {
+      width: 25px;
+    }
+  }
+
+  .header-search {
+    width: 100%;
+    max-width: 250px;
+    height: 35px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    padding: 0 10px;
+    border-radius: 5px;
+    outline: none;
+    transition: 0.3s ease;
+    background: #ffffff5b;
+    margin-left: auto;
+    color: var(--white);
+  }
+  
+  .header-search:focus {
+    border-color: var(--input-focus-border-color);
+    box-shadow: 0 0 5px rgba(110, 142, 251, 0.5);
+  }
+  
+  .header-search::placeholder {
+    color: var(--white);
+  }
+  
+  /* Search in Night Mode */
+  .night-mode .header-search {
+    border-color: #444;
+    background-color: #222;
+    color: #fff;
+  }
+  
+  .night-mode .header-search::placeholder {
+    color: #666;
+  }
+  
+  /* Responsive Styles */
+  .search-small-screen {
+    display: none;
+  }
+  @media screen and (max-width: 768px) {
+    .search-small-screen {
+      display: block;
+    }
+    .search-item {
+      display: none;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .header-search {
+      width: 100%;
+      max-width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      margin: 10px 0;
+    }
+  }

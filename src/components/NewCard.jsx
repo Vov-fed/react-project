@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { createCard } from "../services/userServices";
+import '../css/newCard.css';
 
 function NewCard() {
     const navigate = useNavigate();
@@ -56,12 +57,16 @@ function NewCard() {
         }),
         onSubmit: async (values) => {
             try {
-                await createCard(values);
-                navigate("/success:card");
-            } catch {
-                toast.error("Error updating card");
+                
+                const response = await createCard(values);
+                if(response.status === 201) {
+                    navigate("/success:card");
+                }
+            } catch (error) {
+                console.error("Error creating card", error.response?.data || error.message);
+                alert("Error creating card. Please try again.");
             }
-        }
+        },
     });
     
     const inputs = [
@@ -85,6 +90,12 @@ function NewCard() {
     };
 
     const handleSaveField = () => {
+        if(!editField) {
+            return;
+        }
+        if(document.querySelector(".field-input").value === "") {
+            return;
+        }
         setEditField(null);
     };
 
@@ -114,16 +125,29 @@ function NewCard() {
     const currentError = getIn(formik.errors, currentInput?.name) || "";
 
     const handleNext = () => {
+        if(formik.values[currentInput.name] === "") {
+          return;
+        }
+        if(document.querySelector(".form-input").value === "") {
+          return;
+        }
         if (step < inputs.length - 1) {
-            setStep(step + 1);
+          setStep(step + 1);
+          setTimeout(() => {
+            document.querySelector(".form-input").focus();
+          }, 0);
         }
-    };
+      };
 
-    const handlePrevious = () => {
+      const handlePrevious = () => {
         if (step > 0) {
-            setStep(step - 1);
+          setStep(step - 1);
+          setTimeout(() => {
+            document.querySelector(".form-input").focus();
+          }, 0);
         }
-    };
+    
+      };
     
     return (
 
@@ -142,7 +166,15 @@ function NewCard() {
                                     placeholder={input.placeholder}
                                     onChange={formik.handleChange}
                                     value={currentValue}
-                                    checked={input.type === "checkbox" ? currentValue : false}
+                                    onKeyDown={(e) => {
+                                        if (e.key === "Enter") {
+                                            e.preventDefault();
+                                            handleNext();
+                                        } else if (e.key === "Backspace" && e.target.value === "") {
+                                            e.preventDefault();
+                                            handlePrevious();
+                                        }
+                                    }}
                                     />
                                 {currentError && <div className="newcard-error">{currentError}</div>}
                             </div>
@@ -226,7 +258,16 @@ function NewCard() {
                         className="field-input"
                         type="text"
                         value={getIn(formik.values, editField)}
-                        onChange={(e) => formik.setFieldValue(editField, e.target.value)}
+                        onChange={(e) => {formik.setFieldValue(editField, e.target.value);}}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter") {
+                                e.preventDefault();
+                                handleSaveField();
+                            } else if (e.key === "Backspace" && e.target.value === "") {
+                                setEditField(null);
+                            }
+                        }
+                        }
                         />
                     <button className="field-save-btn" onClick={handleSaveField}>
                         Save

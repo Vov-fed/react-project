@@ -16,6 +16,7 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import EditProfile from './components/EditProfile'
 import Success from './components/Success'
+import Card from './components/Card'
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path='/profile' element={<Profile />} />
         <Route path="/logout" element={<Logout />} />
+        <Route path="/cards/:id" element={<Card />} />
         <Route path="/newCard" element={<NewCard />} />
         <Route path="/editCard" element={<EditCard />} />
         <Route path="*" element={<NotFound />} />
@@ -40,6 +42,8 @@ function App() {
         <Route path = "/success:editProfile" element={<Success />} />
         <Route path = "/success:editCard" element={<Success />} />
         <Route path = "/success:card" element={<Success />} />
+        <Route path = "/success:deleteCard" element={<Success />} />
+        <Route path = "/success:deleteProfile" element={<Success />} />
       </Routes>
     </Router>
     </>

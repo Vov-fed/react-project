@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { useEffect, useState } from "react";
 import { use } from "react";
+import '../css/login.css'
 
 const Login = () => {
   const navigate = useNavigate();

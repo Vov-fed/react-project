@@ -4,6 +4,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import { fetchAllCards } from "../services/userServices";
 import { useSearch } from "../hooks/SearchContext";
+import '../css/header.css';
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -126,6 +127,7 @@ function Navbar() {
             type="text"
             className="header-search"
             placeholder="Search"
+            disabled={window.location.pathname.includes("edit") || window.location.pathname.includes("newCard")}
             onChange={ (e) => {
               navigate("/");
               const cards = document.querySelector("#cards");
@@ -145,6 +147,7 @@ function Navbar() {
           type="text"
           className="header-search"
           placeholder="Search"
+          disabled={window.location.pathname.includes("edit") || window.location.pathname.includes("newCard")}
           onChange={(e) => {
             navigate("/");
             const cards = document.querySelector("#cards");

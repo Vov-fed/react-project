@@ -3,6 +3,7 @@ import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import { fetchAllCards, likeSomeCard } from "../services/userServices";
 import { useSearch } from "../hooks/SearchContext";
+import '../css/main.css';
 
 function Home() {
   const [cards, setCards] = useState([]);
@@ -93,7 +94,9 @@ function Home() {
         
         <div id="cards" className="cards">
           {currentCards.length === 0 && (
+            <div className="no-card-wrapper">
             <p className="no-cards">Oops, there is no cards!</p>
+            </div>
           )}
           <h2 className="cards-title">Cards</h2>
           <div className="cards-container">
@@ -124,8 +127,8 @@ function Home() {
                   </div>
                 </div>
                 <div className="card-btn-wrapper">
-                  <a href={card.web} className="card-btn primary-btn">
-                    Visit Website
+                  <a href={`/cards/${card._id}`} className="card-btn primary-btn">
+                    Learn More...
                   </a>
                   {localStorage.getItem("token") && (
                     <div className="card-like">

@@ -1,0 +1,67 @@
+
+/* Success Page Styling */
+.success-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .success-header {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #4caf50;
+    animation: fadeIn 0.5s ease;
+  }
+  
+  .success-message {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 30px;
+    animation: fadeIn 0.7s ease;
+  }
+  
+  .success-link-wrapper {
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+  
+  .success-link {
+    padding: 10px 20px;
+    background-color: #6e8efb;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  @media (max-width: 480px) {
+    .success-link-wrapper {
+      width: 80%;
+    }
+    .success-link {
+      padding: 10px 30px;
+      font-size: 18px;
+    }
+  }
+  
+  .success-link:hover {
+    background-color: #5c7cfb;
+    transform: scale(1.05);
+  }
+  
+  .success-link:active {
+    background-color: #4b6ae3;
+  }

@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import '../css/register.css';
 
 function Register() {
   const navigate = useNavigate();
@@ -48,7 +49,7 @@ function Register() {
         last: Yup.string().required("Last name is required"),
       }),
       phone: Yup.string()
-        .matches(/^(\+972|0)([23489]|5[0248]|77)[1-9]\d{6}$/, "Phone must be a standard Israeli phone number")
+      .matches(/^05\d{8}$/, "Phone number must start with 05 and be followed by 8 digits")
         .required("Phone number is required"),
       image: Yup.object({
         url: Yup.string()
@@ -78,6 +79,7 @@ function Register() {
       }
     },
   });
+  
 
   const inputs = [
     {
@@ -127,8 +129,12 @@ function Register() {
     })),
     {
       name: "isBusiness",
-      placeholder: "Is Business",
-      type: "checkbox",
+      placeholder: "Are you a business client?",
+      type: "radio",
+      options: [
+        { label: "Yes", value: true },
+        { label: "No", value: false },
+      ],
     },
   ];
 
@@ -141,15 +147,28 @@ function Register() {
     .reduce((obj, key) => obj?.[key], formik.errors);
 
   const handleNext = () => {
+    if(formik.values[currentInput.name] === "") {
+      return;
+    }
+    if(document.querySelector(".register-input").value === "") {
+      return;
+    }
     if (step < inputs.length - 1) {
       setStep(step + 1);
+      setTimeout(() => {
+        document.querySelector(".register-input").focus();
+      }, 0);
     }
   };
 
   const handlePrevious = () => {
     if (step > 0) {
       setStep(step - 1);
+      setTimeout(() => {
+        document.querySelector(".register-input").focus();
+      }, 0);
     }
+
   };
   return (
     <div className="register-wrapper">
@@ -158,22 +177,45 @@ function Register() {
         {inputs.map((input, index) => (
           index === step && (
             <div key={input.name} className={`register-input-wrapper ${input.type === "checkbox" ? "register-checkbox-wrapper" : ""}`}>
-              {input.type == "checkbox" && 
-                <label className="register-label">
-                  Are u a business?
-                </label>
-              }
-              <input
-                className={`register-input ${
-                  currentError ? "register-input-error" : ""
-                } ${input.type === "checkbox" ? "register-checkbox" : ""}`}
-                type={input.type}
-                name={input.name}
-                placeholder={input.placeholder}
-                onChange={formik.handleChange}
-                value={input.type === "checkbox" ? undefined : currentValue || ""}
-                checked={input.type === "checkbox" ? currentValue : false}
-              />
+              <h3 className="register-input-title">{input.placeholder}</h3>
+              {input.type === "radio" ? (
+                <div className="custom-radio-group">
+                {input.options.map((option) => (
+                  <label
+                    key={option.value}
+                    className={`custom-radio-label ${
+                    formik.values.isBusiness === option.value ? "checked" : ""
+                    }`}
+                    >
+                  <input
+                    type="radio"
+                    name={input.name}
+                    value={option.value}
+                    checked={formik.values.isBusiness === option.value}
+                    onChange={() => formik.setFieldValue(input.name, option.value)}
+                    className="custom-radio-input"
+                  />
+                  {option.label}
+        </label>
+      ))}
+                </div>
+              ) : (
+                <input
+                  className={`register-input ${input.type === "checkbox" ? "register-checkbox" : ""}`}
+                  type={input.type}
+                  name={input.name}
+                  placeholder={input.placeholder}
+                  onChange={formik.handleChange}
+                  value={currentValue || ""}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleNext();
+                    } else if (e.key === "Backspace" && e.target.value === "") {
+                      handlePrevious();
+                    }
+                  }}
+                />
+              )}
               {currentError && <div className="register-error">{currentError}</div>}
             </div>
           )
@@ -191,7 +233,7 @@ function Register() {
           {step < inputs.length - 1 && (
             <button
               type="button"
-              className="register-button-next"
+              className={`register-button-next ${!!currentError || currentValue ? "register-button-next-error" : ""}`}
               onClick={handleNext}
               disabled={!!currentError || currentValue === ""}
             >

@@ -1,45 +1,23 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import { fetchAllCards, fetchAllLikedCards, fetchAllMyCards, fetchMe, likeSomeCard } from "../services/userServices";
-import { toast } from "react-toastify";
+import { deleteCard, fetchAllLikedCards, fetchAllMyCards, fetchMe, likeSomeCard } from "../services/userServices";
+import "../css/profile.css";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
-  const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [loadingDelete, setLoadingDelete] = useState(false);
   const [likedCards, setLikedCards] = useState([]);
-  const cardsPerPage = 25;
+  const [deleteCardQuestion, setDeleteCardQuestion] = useState(false);
   const [myCards, setMyCards] = useState([]);
   const navigate = useNavigate();
 
 
-  
-  
-  let success = localStorage.getItem("success") || null;
-  useEffect(() => {
-    if(!localStorage.getItem("token")){
-      navigate("/login");
-      window.location.reload();
-    }
-    if (success) {
-      toast.success('oh yeah');
-      setInterval(() => {
-        localStorage.removeItem("success");
-      }, 5000);
-    }
-  }, []);
-
-  const indexOfLastCard = currentPage * cardsPerPage;
-  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  const currentCards = cards.slice(indexOfFirstCard, indexOfLastCard);
-
-  const token = localStorage.getItem("token");
-  if (!token) {
-    navigate("/");
+  if(localStorage.getItem("token") === null){
+    console.log("No token found");
+    window.location.href = "/login";
   }
-
   const fetchUser = async () => {
     try {
       const response = await fetchMe();
@@ -51,33 +29,22 @@ const Profile = () => {
     }
   };
 
-  const fetchCards = async () => {
-    try {
-      const response = await fetchAllCards();
-      setCards(response);
-    } catch (error) {
-      console.error("Error fetching cards:", error.response?.data || error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const likeCard = async (id) => {
     try {
       await likeSomeCard(id);
-      fetchCards();
+      await fetchLikedCards();
+      const response = await fetchAllMyCards();
+      setMyCards(response);
     } catch (error) {
       console.error("Error liking card:", error.response?.data || error.message);
     }
   };
 
+
   const fetchLikedCards = async () => {
     try {
       const response = await fetchAllLikedCards();
       let likedCards = response;
-      if (likedCards.length >= 4) {
-        likedCards = likedCards.slice(-4);
-      }
       setLikedCards(likedCards);
     } catch (error) {
       console.error("Error fetching cards:", error.response?.data || error.message);
@@ -104,12 +71,15 @@ const Profile = () => {
   useEffect(() => {
     fetchUser();
     fetchLikedCards();
-    fetchCards();
   }, []);
 
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
+  useEffect(() => {
+    if (deleteCardQuestion) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [deleteCardQuestion]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -184,7 +154,8 @@ const Profile = () => {
                               ? "fa-solid fa-heart liked"
                               : "fa-regular fa-heart"
                               }
-                  onClick={() => likeCard(card._id)}
+                  onClick={() => {likeCard(card._id);
+                  }}
                 ></i>
                 <span className="like-count">{card.likes.length}</span>
     </div>
@@ -195,14 +166,65 @@ const Profile = () => {
       <i className="fa-solid fa-pen"></i>
     </Link>
   </div>
+  <div className="card-delete" onClick={() => {
+    localStorage.setItem("cardId", card._id)
+    setDeleteCardQuestion(true)
+    }}>
+    <i className="fa-solid fa-trash"></i>
+  </div>
   </div>
                     </div>
                   ))}
                 </div>
+                {deleteCardQuestion && (
+loadingDelete ? (
+        <div className="delete-card-question">
+          <div className="delete-card-question-wrapper">
+            <img
+            className="loading"
+            src="src/img/loading.png"
+            alt="Loading"
+            />
+          </div>
+        </div>
+      ) :
+        (<div className="delete-card-question">
+          <div className="delete-card-question-wrapper">
+            <i
+            className="fa-solid fa-exclamation-circle
+            delete-card-question-icon"
+            >
+            </i>
+          <p>Are you sure you want to delete this card?</p>
+          <div className="delete-card-btns">
+          <button className="delete-card-btn" onClick={async () => {
+            console.log(localStorage.getItem("cardId"));
+            setLoadingDelete(true);
+            const response = await deleteCard(localStorage.getItem("cardId"));
+            setLoadingDelete(false);
+            setDeleteCardQuestion(false);
+            fetchMyCards();
+                }
+        }>
+            Yes
+          </button>
+          <button
+            className="cancel-delete-card-btn"
+            onClick={() => setDeleteCardQuestion(false)}
+            >
+            No
+          </button>
+          </div>
+            </div>
+        </div>)
+      )}
               </div>
             ) : null}
             <div className="profile-bottom">
               <h2 className="profile-bottom-title">Liked cards</h2>
+              {likedCards.length === 0 && (
+                <p className="no-liked-cards">You haven't liked any cards yet.</p>
+              )}
               <div className="profile-bottom-cards">
                 {likedCards.map((card) => (
                   <div key={card._id} className="card profile-card-bottom">
@@ -222,7 +244,7 @@ const Profile = () => {
                 </div>
                 <div className="card-date">
                   <i className="fa-solid fa-calendar"></i>
-                  <span className="card-created">{card.createdAt.slice(0, 10).replace(/-/g, ".")}</span>
+                  <span className="card-created">{card.createAt.slice(0, 10).replace(/-/g, ".")}</span>
                 </div>
               </div>
               <div className="card-btn-wrapper">
@@ -237,7 +259,7 @@ const Profile = () => {
                               ? "fa-solid fa-heart liked"
                               : "fa-regular fa-heart"
                               }
-                  onClick={() => likeCard(card._id)}
+                  onClick={() => {likeCard(card._id);}}
                 ></i>
                 <span className="like-count">{card.likes.length}</span>
     </div>

@@ -1,16 +1,24 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchMe, upadateUser } from "../services/userServices";
+import { deleteAccount, fetchMe, upadateUser } from "../services/userServices";
 import { toast } from "react-toastify";
 import { useFormik, getIn } from "formik";
 import * as Yup from "yup";
+import '../css/editProfile.css'
 
 const EditProfile = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [loadingDelete, setLoadingDelete] = useState(false);
   const navigate = useNavigate();
+  const [deleteAccountQuestion, setDeleteAccountQuestion] = useState(false);
   const success = localStorage.getItem("success");
   // Display success message if available
+
+
+  if(localStorage.getItem("token") === null){
+    window.location.href = "/login";
+  }
   useEffect(() => {
     if (success) {
       toast.success("Profile updated successfully!");
@@ -74,7 +82,7 @@ const EditProfile = () => {
       }),
       phone: Yup.string()
         .matches(
-          /^(\+972|0)([23489]|5[0248]|77)[1-9]\d{6}$/,
+          /^05\d{8}$/,
           "Phone must be a standard Israeli phone number"
         )
         .required("Phone number is required"),
@@ -188,6 +196,7 @@ const EditProfile = () => {
                     {getIn(formik.errors, input.name)}
                     </div>
                 ) : null}
+                
                 </div>
             ))}
             <div className="edit-submit">
@@ -196,6 +205,7 @@ const EditProfile = () => {
               !formik.dirty ||
               !formik.isValid ||
               formik.isSubmitting
+
               }>
                 Save Changes
             </button>
@@ -207,6 +217,51 @@ const EditProfile = () => {
                 navigate('/profile')}}>Cancel</button>
               </div>
             </form>
+                <button className="edit-delete-btn" onClick={() => setDeleteAccountQuestion(true)}> Delete Account
+                </button>
+              {deleteAccountQuestion && (
+              loadingDelete ? (
+                      <div className="delete-card-question">
+                        <div className="delete-card-question-wrapper">
+                          <img
+                          className="loading"
+                          src="src/img/loading.png"
+                          alt="Loading"
+                          />
+                        </div>
+                      </div>
+                    ) :
+                      (<div className="delete-card-question">
+                        <div className="delete-card-question-wrapper">
+                          <i
+                          className="fa-solid fa-exclamation-circle
+                          delete-card-question-icon"
+                          >
+                          </i>
+                        <p>Are you sure you want to delete your card?</p>
+                        <div className="delete-card-btns">
+                        <button className="delete-card-btn" onClick={async () => {
+                          console.log(localStorage.getItem("cardId"));
+                          setLoadingDelete(true);
+                          const response = await deleteAccount(localStorage.getItem("cardId"));
+                          console.log(response);
+                          setLoadingDelete(false);
+                          setDeleteAccountQuestion(false);
+                              }
+                      }>
+                          Yes
+                        </button>
+                        <button
+                          className="cancel-delete-card-btn"
+                          onClick={() => setDeleteAccountQuestion(false)}
+                          >
+                          No
+                        </button>
+                        </div>
+                          </div>
+                      </div>)
+                    )}
+
         </div>
         </div>
     ) : (

@@ -133,10 +133,10 @@ export const createCard = async (values) => {
     data: values,
   };
   try {
-    await axios.request(config);
+    const response = await axios.request(config);
+    return response;
   } catch (error) {
     console.error("Error creating card:", error.response?.data || error.message);
-    alert("An error occurred while creating the card.");
   }
 }
 
@@ -155,5 +155,45 @@ export const upadateUser = async (values) => {
     await axios.request(config);
   } catch (error) {
     alert("Error updating user:", error.response?.data || error.message);
+  }
+}
+
+
+export const deleteCard = async (id) => {
+  console.log('deleteCard called', id); // Debugging: Check if the ID is passed correctly.
+
+  let config = {
+    method: 'delete',
+    maxBodyLength: Infinity,
+    url: `https://cardsservice.onrender.com/cards/${id}`,
+    headers: {
+      'x-auth-token': localStorage.getItem('token'),
+    },
+  };
+  try {
+    const response = await axios.request(config);
+    console.log("Card deleted successfully:", response); // Log the response
+  } catch (error) {
+    console.error("Error deleting card:", error.response?.data || error.message);
+    alert("An error occurred while deleting the card.");
+  }
+};
+
+
+export const deleteAccount = async () => {
+  let config = {
+    method: 'delete',
+    maxBodyLength: Infinity,
+    url: `https://cardsservice.onrender.com/users/${jwtDecode(localStorage.getItem('token'))._id}`,
+    headers: {
+      'x-auth-token': localStorage.getItem('token'),
+    },
+  };
+  try {
+    const response = await axios.request(config);
+    return response;
+  } catch (error) {
+    console.error("Error deleting account:", error.response?.data || error.message);
+    alert("An error occurred while deleting the account.");
   }
 }

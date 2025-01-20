@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import '../css/success.css';
 
 function Success() {
   return (
@@ -23,6 +24,12 @@ function Success() {
       )}
       {window.location.pathname === "/success:editProfile" && (
         <div className="success-message">Your profile is now updated!</div>
+      )}
+      {window.location.pathname === "/success:deleteCard" && (
+        <div className="success-message">Your card is now deleted!</div>
+      )}
+      {window.location.pathname === "/success:deleteProfile" && (
+        <div className="success-message">Your profile is now deleted!</div>
       )}
       <div className="success-link-wrapper">
         <Link to="/" className="success-link">
