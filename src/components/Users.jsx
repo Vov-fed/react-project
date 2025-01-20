@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { deleteAccount, fetchAllUsers } from "../services/userServices";
+import { deleteAccountById, fetchAllUsers } from "../services/userServices";
 import "../css/users.css";
 import { jwtDecode } from "jwt-decode";
 
@@ -9,21 +9,36 @@ const Users = () => {
   const [error, setError] = useState(null);
   const [deleteAccountQuestion, setDeleteAccountQuestion] = useState(false);
   const [loadingDelete, setLoadingDelete] = useState(false);
+  const [userToDelete, setUserToDelete] = useState(null)
 
+  const fetchUsers = async () => {
+    try {
+      const response = await fetchAllUsers();
+      setUsers(response);
+    } catch (error) {
+      setError(error.response?.data || error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetchAllUsers();
-        setUsers(response);
-      } catch (error) {
-        setError(error.response?.data || error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
 
     fetchUsers();
   }, []);
+
+  const deleteUser = async (id) => {
+    setLoadingDelete(true);
+    try {
+        await deleteAccountById(id);
+        fetchUsers();
+        // setUsers(users.filter(user => user.id !== id));
+    } catch (error) {
+        setError(error.response?.data || error.message);
+    } finally {
+        setLoadingDelete(false);
+        setDeleteAccountQuestion(false);
+    }
+  }
 
   useEffect(() => {
     if (deleteAccountQuestion) {
@@ -65,16 +80,9 @@ const Users = () => {
                                 <div className="delete-timer">
                                     <span className="delete-timer-number"> 3 </span>
                                 </div>
-                        <p>Are you sure you want to delete your card?</p>
+                        <p>Are you sure you want to delete user?</p>
                         <div className="delete-card-btns">
-                        <button className="delete-card-btn" onClick={async () => {
-                          setLoadingDelete(true);
-                          const response = await deleteAccount(jwtDecode(localStorage.getItem('token'))._id);
-                          console.log(response);
-                          setLoadingDelete(false);
-                          setDeleteAccountQuestion(false);
-                        }
-                      }>
+                        <button className="delete-card-btn" onClick={() => deleteUser(userToDelete)}>
                           Yes
                         </button>
                         <button
@@ -108,8 +116,11 @@ const Users = () => {
       ) : (
         <div className="users-grid">
           {users.map((user) => (
-             <div key={user.email} className="user"
-             onClick={() => setDeleteAccountQuestion(true)}
+             <div key={user._id} className="user"
+             onClick={() => {
+                setUserToDelete(user._id)
+                setDeleteAccountQuestion(true);
+             }}
              >
              <div className="user-wrapper">
                  <div className="user-top">

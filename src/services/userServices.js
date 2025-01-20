@@ -198,6 +198,24 @@ export const deleteAccount = async () => {
   }
 }
 
+export const deleteAccountById = async (id) => {
+  let config = {
+    method: 'delete',
+    maxBodyLength: Infinity,
+    url: `https://cardsservice.onrender.com/users/${id}`,
+    headers: {
+      'x-auth-token': localStorage.getItem('token'),
+    },
+  };
+  try {
+    const response = await axios.request(config);
+    return response;
+  } catch (error) {
+    console.error("Error deleting account:", error.response?.data || error.message);
+    alert("An error occurred while deleting the account.");
+  }
+}
+
 export const fetchAllUsers = async () => {
   let config = {
     method: 'get',
