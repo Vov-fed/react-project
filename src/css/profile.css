@@ -135,11 +135,16 @@
     }
   
     .profile-actions {
-      flex-direction: column;
       gap: 10px;
     }
   }
   
+
+  @media (max-width: 480px) {
+    .profile-actions{
+      flex-direction: column;
+    }
+  }
   /* Card Sections */
   .profile-bottom {
     display: flex;

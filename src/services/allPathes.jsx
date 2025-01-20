@@ -1,4 +1,5 @@
 import About from "../components/About";
+import Admin from "../components/Admin";
 import Card from "../components/Card";
 import EditCard from "../components/EditCard";
 import EditProfile from "../components/EditProfile";
@@ -10,6 +11,7 @@ import NotFound from "../components/NotFound";
 import Profile from "../components/Profile";
 import Register from "../components/Signup";
 import Success from "../components/Success";
+import Users from "../components/Users";
 
 const pathes = [
     {
@@ -106,7 +108,17 @@ const pathes = [
         key: 19,
         path: '/success:deleteProfile',
         element: <Success />
-    }
+    },
+    {
+        key: 20,
+        path: '/admin',
+        element: <Admin />
+    },
+    {
+        key: 21,
+        path: '/users',
+        element: <Users />
+    },
 ]
 
 export default pathes

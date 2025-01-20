@@ -91,7 +91,9 @@ const Profile = () => {
   return (
     <div id="profile" className="container">
       {loading ? (
-        <img className="loading" id="loading" src="src/img/loading.png" alt="Loading" />
+        <img className="loading" id="loading"
+        src="https://images2.imgbox.com/f5/8b/N9P4UPmE_o.png"
+        alt="Loading" />
       ) : user ? (
         <div className="profile">
           <div className="profile-wrapper">

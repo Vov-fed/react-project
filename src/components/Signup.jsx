@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
@@ -32,6 +32,7 @@ function Register() {
         zip: "",
       },
       isBusiness: false,
+      isAdmin: false,
     },
     validationSchema: Yup.object({
       email: Yup.string()
@@ -65,6 +66,7 @@ function Register() {
         houseNumber: Yup.number().typeError("Please enter a number").required("House number is required"),
       }),
       isBusiness: Yup.boolean(),
+      isAdmin: Yup.boolean(),
     }),
     onSubmit: async (values) => {
       try {
@@ -136,6 +138,15 @@ function Register() {
         { label: "No", value: false },
       ],
     },
+    {
+      name: "isAdmin",
+      placeholder: "Are you an admin?",
+      type: "radio",
+      options: [
+        { label: "Yes", value: true },
+        { label: "No", value: false },
+      ],
+    }
   ];
 
   const currentInput = inputs[step];
@@ -150,7 +161,7 @@ function Register() {
     if(formik.values[currentInput.name] === "") {
       return;
     }
-    if(document.querySelector(".register-input").value === "") {
+    if(document.querySelector(".register-input")?.value === "") {
       return;
     }
     if (step < inputs.length - 1) {
@@ -184,14 +195,14 @@ function Register() {
                   <label
                     key={option.value}
                     className={`custom-radio-label ${
-                    formik.values.isBusiness === option.value ? "checked" : ""
+                    formik.values[input.name] === option.value ? "checked" : ""
                     }`}
                     >
                   <input
                     type="radio"
                     name={input.name}
                     value={option.value}
-                    checked={formik.values.isBusiness === option.value}
+                    checked={formik.values[input.name] === option.value}
                     onChange={() => formik.setFieldValue(input.name, option.value)}
                     className="custom-radio-input"
                   />
@@ -241,7 +252,9 @@ function Register() {
             </button>
           )}
           {step === inputs.length - 1 && (
-            <button type="submit" className="register-button-submit">
+            <button type="submit" className="register-button-submit"
+            disabled={formik.isSubmitting}
+            >
               Sign Up!
             </button>
           )}

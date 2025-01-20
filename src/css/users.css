@@ -1,0 +1,172 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+}
+
+/* Users Page */
+.users-page {
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.users-loading,
+.users-error,
+.users-empty {
+  text-align: center;
+  font-size: 18px;
+  color: #555;
+}
+
+.users-loading .loading-spinner {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.users-error {
+  color: #d9534f;
+}
+
+.users-empty {
+  color: #777;
+}
+
+/* Users Grid */
+.users-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+/* User Card */
+.user {
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.user:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.user-wrapper {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+}
+
+.user-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-image-container {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.user-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.user-info {
+  color: #333;
+}
+
+.user-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 5px 0;
+  color: #007bff;
+}
+
+.user-email {
+  font-size: 14px;
+  color: #777;
+  word-wrap: break-word;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .users-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .user-wrapper {
+    padding: 15px;
+  }
+
+  .user-name {
+    font-size: 16px;
+  }
+
+  .user-email {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .users-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .user-image-container {
+    width: 60px;
+    height: 60px;
+  }
+
+  .user-name {
+    font-size: 14px;
+  }
+
+  .user-email {
+    font-size: 12px;
+  }
+}
+
+
+.delete-card-question-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+
+
+
+.delete-timer-number{
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--white);
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 40px;
+  background: #007bff;
+
+}

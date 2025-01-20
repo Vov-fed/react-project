@@ -12,7 +12,6 @@ function Navbar() {
   const [cards, setCards] = useState([]);
   const { setSearchQuery } = useSearch();
 
-
   const navigate = useNavigate();
 
   const toggleMenu = () => {
@@ -115,6 +114,16 @@ function Navbar() {
             <i className="fa-solid fa-plus"></i>New card
           </NavLink>}
         </li>
+        {
+          localStorage.getItem("token") &&
+          jwtDecode(localStorage.getItem("token")).isAdmin && (
+            <li className="header-nav-item">
+              <NavLink to="/admin" className={({ isActive }) => (isActive ? "active" : "")} onClick={closeMenu}>
+                Admin
+              </NavLink>
+            </li>
+          )
+        }
         <li
         className="header-nav-item night-mode-btn"
         onClick={()=>{setNightMode(!nightMode)}}

@@ -197,3 +197,21 @@ export const deleteAccount = async () => {
     alert("An error occurred while deleting the account.");
   }
 }
+
+export const fetchAllUsers = async () => {
+  let config = {
+    method: 'get',
+    maxBodyLength: Infinity,
+    url: 'https://cardsservice.onrender.com/users',
+    headers: {
+      'x-auth-token': localStorage.getItem('token'),
+    },
+  };
+  try {
+    let response = await axios.request(config);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching users:", error.response?.data || error.message);
+    alert("An error occurred while fetching the users.");
+  }
+}
