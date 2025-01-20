@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCardById, likeSomeCard } from "../services/userServices";
 import { jwtDecode } from "jwt-decode";
-import '../css/Card.css';
+import '../css/card.css';
 
 const Card = () => {
   const cardId = window.location.pathname.split("/")[2];
