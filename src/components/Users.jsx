@@ -14,7 +14,9 @@ const Users = () => {
   const fetchUsers = async () => {
     try {
       const response = await fetchAllUsers();
-      setUsers(response);
+    const decodedToken = jwtDecode(localStorage.getItem("token"));
+    const filteredUsers = response.filter(user => user._id !== decodedToken.userId);
+      setUsers(filteredUsers);
     } catch (error) {
       setError(error.response?.data || error.message);
     } finally {

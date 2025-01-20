@@ -51,10 +51,10 @@ const Admin = () => {
       <h1 className="profile-name">{user.name.first} {user.name.last}</h1>
       <p className="profile-email">{user.email}</p>
       <div className="profile-actions">
-        <button className="edit-profile-btn" onClick={() => navigate("/cards")}>
+        <button className="edit-profile-btn" onClick={() => {navigate("/cards")}}>
           <i className="fa-solid fa-address-card"></i> Edit cards
         </button>
-        <button className="logout-btn" onClick={navigate("/users")}>
+        <button className="logout-btn" onClick={() => navigate("/users")}>
           <i className="fa-solid fa-users"></i> Edit Users
         </button>
       </div>
