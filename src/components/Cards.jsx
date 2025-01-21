@@ -74,13 +74,15 @@ const Cards = () => {
                     const totalPages = Math.ceil(filteredCards.length / cardsPerPage);
                     return (
                         <div id="cards" className="cards-wrapper">
-            <input
-                type="text"
-                placeholder="Search cards..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="header-search but-not-header"
-                />
+            <div className="cards-search-wrapper">
+                <input
+                    type="text"
+                    placeholder="Search cards..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="header-search but-not-header"
+                    />
+            </div>
             {loading ? (
                 <img
                 className="loading"

@@ -137,6 +137,7 @@
   
   @media (max-width: 768px) {
     .header-nav.open {
+      z-index: 400;
       padding: 1rem;
     }
   }
@@ -209,12 +210,37 @@
     }
   }
 
-
-  .but-not-header{
+  .cards-search-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     top: 100px;
+    width: 100vw;
+    z-index: 9;
+    background: #f9f9f9;
+  }
+
+  .night-mode .cards-search-wrapper{
+    background: var(--night-mode-background);
+  }
+
+  .but-not-header{
     background: #6b63ffc2;
     width: 100%;
+  }
+
+  @media (max-width: 1024px) {
+    .but-not-header{
+      width: 300px;
+    }
+    .cards-search-wrapper{
+
+      top: 60px;
+    }
+    .cards-wrapper{
+      padding-top: 60px;
+    }
   }
 
   .but-not-header:hover{
