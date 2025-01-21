@@ -21,7 +21,7 @@ const Admin = () => {
     } catch (error) {
     console.log("Error fetching user:", error.response?.data || error.message);
     } finally {
-    setLoading(false);
+    setLoading(false); 
     }
 };
 
