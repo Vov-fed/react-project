@@ -34,14 +34,21 @@
     "globals": "^15.13.0",
     "vite": "^6.0.3"
   },
-    "root": "build/",
-    "clean_urls": true,
-    "routes": {
-      "/**": "index.html"
-    },
-    "headers": {
-      "/**": {
-        "Cache-Control": "no-cache"
+  "now": {
+    "builds": [
+      { "src": "package.json", "use": "@now/static-build", "config": { "distDir": "build" } }
+    ],
+    "routes": [
+      { "src": "/(.*)", "dest": "/index.html" }
+    ],
+    "cleanUrls": true,
+    "headers": [
+      {
+        "source": "/(.*)",
+        "headers": [
+          { "key": "Cache-Control", "value": "no-cache" }
+        ]
       }
-    }
+    ]
+  }
 }
