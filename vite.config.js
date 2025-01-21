@@ -7,6 +7,7 @@ export default defineConfig({
   server: {
     historyApiFallback: true, // Redirect all 404s to index.html
   },
+  base: '/', // Set the base path to /my-app/
   build: {
     outDir: 'dist', // Ensure your build output is directed to the dist folder
   },
