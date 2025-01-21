@@ -12,7 +12,7 @@ const Admin = () => {
 
   if(localStorage.getItem("token") === null){
     console.log("No token found");
-    window.location.href = "/login";
+    window.location.href = "/login"; 
   }
   const fetchUser = async () => {
     try {
