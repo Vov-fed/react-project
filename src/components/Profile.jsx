@@ -13,11 +13,12 @@ const Profile = () => {
   const [myCards, setMyCards] = useState([]);
   const navigate = useNavigate();
 
-
+useEffect(() => {
   if(localStorage.getItem("token") === null){
-    console.log("No token found");
-    window.location.href = "/login";
+    navigate("/login");
+    window.location.reload();
   }
+}, []);
   const fetchUser = async () => {
     try {
       const response = await fetchMe();
