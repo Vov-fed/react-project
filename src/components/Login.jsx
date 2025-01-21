@@ -78,7 +78,7 @@ const Login = () => {
         <button
           type="submit"
           className="login-submit-btn"
-          disabled={!(formik.isValid && formik.dirty)}
+          disabled={!(formik.isValid && formik.dirty)||formik.isSubmitting}
         >
           Login
         </button>

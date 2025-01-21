@@ -118,8 +118,16 @@
     position: absolute;
     top: 60px;
     left: 0;
-    background: rgba(58, 28, 113, 0.95); /* Slightly darker background */
+    background: linear-gradient(80deg, var(--secondary-color), #3a1c71); /* Slightly darker background */
     animation: fadeIn 0.3s ease forwards;
+    }
+
+    .header:hover{
+      background: linear-gradient(135deg, var(--secondary-color), #3a1c71);
+    }
+
+    .night-mode .header-nav {
+      background: linear-gradient(80deg, var(--night-mode-background), var(--night-mode-header-gradient-end));
     }
   
     .burger {
@@ -199,4 +207,30 @@
       font-size: 14px;
       margin: 10px 0;
     }
+  }
+
+
+  .but-not-header{
+    position: fixed;
+    top: 100px;
+    background: #6b63ffc2;
+    width: 100%;
+  }
+
+  .but-not-header:hover{
+    background: #6b63ff;
+  }
+
+
+  .but-not-header:focus{
+    background: #6b63ff;
+    border: 1px solid var(--primary-color);
+  }
+
+  .night-mode .but-not-header{
+    background: #6b63ff3b;
+  }
+
+  .night-mode .but-not-header:hover{
+    background: #6b63ff32;
   }

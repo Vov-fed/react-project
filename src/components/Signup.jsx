@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import '../css/register.css';
@@ -253,14 +253,12 @@ function Register() {
           )}
           {step === inputs.length - 1 && (
             <button type="submit" className="register-button-submit"
-            disabled={formik.isSubmitting}
-            >
-              Sign Up!
+            disabled={formik.isSubmitting}>Sign Up!
             </button>
           )}
         </div>
         <p className="register-login-link">
-          Already have an account? <a href="/">Login</a>
+          Already have an account? <Link to={'/login'}>Login</Link>
         </p>
       </form>
     </div>

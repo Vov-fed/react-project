@@ -310,3 +310,21 @@
 .card-edit:hover{
   color: var(--button-hover-background);
 }
+
+
+
+
+.cards-wrapper{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+.night-mode .delete-card-question-wrapper{
+  background: var(--primary-color);
+  color: var(--white);
+}
+

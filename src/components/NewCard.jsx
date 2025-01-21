@@ -203,7 +203,9 @@ function NewCard() {
                             )}
                             {step === inputs.length - 1 && <button
                                 className="btn-submit"
-                                type="submit">Submit</button>}
+                                type="submit"
+                                disabled={formik.isSubmitting}
+                                >Submit</button>}
                         </div>
                         <div className="form-cancel-btn">
                             <button

@@ -132,12 +132,21 @@ function EditCard() {
     const currentError = getIn(formik.errors, currentInput?.name) || "";
 
     const handleNext = () => {
+        if(step === inputs.length - 1) {
+            return;
+        }
+        if(currentError || currentValue === "") {
+            return;
+        }
         if (step < inputs.length - 1) {
             setStep(step + 1);
         }
     };
 
     const handlePrevious = () => {
+        if(step === 0) {
+            return;
+        }
         if (step > 0) {
             setStep(step - 1);
         }
@@ -158,7 +167,18 @@ function EditCard() {
                                     type={input.type}
                                     name={input.name}
                                     placeholder={input.placeholder}
-                                    onChange={formik.handleChange}
+                                    onChange={formik. handleChange}
+                                    onKeyDown={(e) => {
+                                                        if (e.key === "Enter") {
+                                                            e.preventDefault();
+                                                            handleNext();
+                                                            }
+                                                        if(e.key === "Escape" && currentValue === "") {
+                                                            e.preventDefault();
+                                                            handlePrevious();
+                                                        }
+                                                    }
+                                                }
                                     value={currentValue}
                                     checked={input.type === "checkbox" ? currentValue : false}
                                     />
@@ -180,7 +200,11 @@ function EditCard() {
                             <button
                             type="button"
                             className="btn-next"
-                            onClick={handleNext}
+                            onClick={
+                                ()=> {
+                                    if (!document.querySelector('.btn-next').disabled) { 
+                                        handleNext();
+                                    }}}
                             disabled={!!currentError || currentValue === ""}
                             >
                                 Next
@@ -189,6 +213,7 @@ function EditCard() {
                         {step === inputs.length - 1 && <button
                             className="btn-submit"
                             onClick={formik.handleSubmit}
+                            disabled={formik.isSubmitting}
                             type="submit">Submit</button>}
                     </div>
                 </div>
@@ -238,7 +263,8 @@ function EditCard() {
                         value={getIn(formik.values, editField)}
                         onChange={(e) => formik.setFieldValue(editField, e.target.value)}
                         />
-                    <button className="field-save-btn" onClick={handleSaveField}>
+                    <button className="field-save-btn" onClick={handleSaveField}
+                    >
                         Save
                     </button>
                 </div>
