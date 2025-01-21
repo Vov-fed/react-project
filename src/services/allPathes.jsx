@@ -1,6 +1,7 @@
 import About from "../components/About";
 import Admin from "../components/Admin";
 import Card from "../components/Card";
+import Cards from "../components/Cards";
 import EditCard from "../components/EditCard";
 import EditProfile from "../components/EditProfile";
 import Home from "../components/Home";
@@ -119,6 +120,11 @@ const pathes = [
         path: '/users',
         element: <Users />
     },
+    {
+        key: 22,
+        path: '/cards',
+        element: <Cards />
+    }
 ]
 
 export default pathes

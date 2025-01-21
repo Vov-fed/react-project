@@ -386,3 +386,8 @@
     background: url('https://images2.imgbox.com/bb/e5/pKSwArRX_o.png') no-repeat center bottom;
     background-size: 800px;
   }
+
+
+  .card-date-delete{
+    justify-content: space-between;
+  }
