@@ -179,7 +179,7 @@ const EditProfile = () => {
             <h2 className="profile-bottom-title">Edit your profile</h2>
             <form
             className="profile-edit-form"
-            onSubmit={formik.handleSubmit}
+            onSubmit={() => formik.handleSubmit()}
             >
             {inputValues.map((input) => (
                 <div className="profile-edit-input" key={input.name}>
@@ -205,7 +205,6 @@ const EditProfile = () => {
               !formik.dirty ||
               !formik.isValid ||
               formik.isSubmitting
-
               }>
                 Save Changes
             </button>

@@ -93,12 +93,12 @@ function Home() {
       ) : currentCards ? (
         
         <div id="cards" className="cards">
+          <h2 className="cards-title">Cards</h2>
           {currentCards.length === 0 && (
             <div className="no-card-wrapper">
             <p className="no-cards">Oops, there is no cards!</p>
             </div>
           )}
-          <h2 className="cards-title">Cards</h2>
           <div className="cards-container">
             {currentCards.map((card) => (
               <div key={card._id} className="card">

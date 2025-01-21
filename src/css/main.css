@@ -382,12 +382,20 @@
     background-size: 800px;
   }
   
+  .card-date-delete{
+    justify-content: space-between;
+  }
   .night-mode .no-card-wrapper{
     background: url('https://images2.imgbox.com/bb/e5/pKSwArRX_o.png') no-repeat center bottom;
     background-size: 800px;
   }
-
-
-  .card-date-delete{
-    justify-content: space-between;
+  @media (max-width: 768px) {
+    .no-card-wrapper{
+      background-size: 500px;
+    }
+    .night-mode .no-card-wrapper{
+      background-size: 500px;
+    }
   }
+  
+

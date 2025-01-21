@@ -116,6 +116,15 @@
     background: #ccc;
     cursor: not-allowed;
   }
+
+  .night-mode .edit-submit-btn {
+    background: #0056b3;
+  }
+
+  .night-mode .edit-submit-btn:disabled {
+    background: #504f4fee;
+    color: #ccc;
+  }
   .edit-submit-btn:hover {
     background: #0056b3;
   }

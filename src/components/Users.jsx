@@ -10,6 +10,7 @@ const Users = () => {
   const [deleteAccountQuestion, setDeleteAccountQuestion] = useState(false);
   const [loadingDelete, setLoadingDelete] = useState(false);
   const [userToDelete, setUserToDelete] = useState(null)
+  const [timer, setTimer] = useState(3);
 
   const fetchUsers = async () => {
     try {
@@ -28,6 +29,22 @@ const Users = () => {
     fetchUsers();
   }, []);
 
+
+  const getBackgroundColor = (value) => {
+    switch (value) {
+        case 3:
+            return "#007bff4d";
+            case 2:
+                return "#007bff84";
+                case 1:
+                    return "#007bffae";
+                    case 0:
+                        return "#007bff";
+                        default:
+                            return "#007bff4d";
+                        }
+                    };
+
   const deleteUser = async (id) => {
     setLoadingDelete(true);
     try {
@@ -44,24 +61,21 @@ const Users = () => {
 
   useEffect(() => {
     if (deleteAccountQuestion) {
-      setTimeout(() => {
-        setDeleteAccountQuestion(false);
-      }, 4000);
-      setTimeout(() => {
-        document.querySelector('.delete-timer-number').innerText = ' 2 ';
-        document.querySelector('.delete-timer-number').style.backgroundColor = '#007bffae';
-      }, 1000);
-        setTimeout(() => {
-            document.querySelector('.delete-timer-number').innerText = ' 1 ';
-        document.querySelector('.delete-timer-number').style.backgroundColor = '#007bff84';
-        }, 2000);
-        setTimeout(() => {
-            document.querySelector('.delete-timer-number').innerText = ' 0 ';
-        document.querySelector('.delete-timer-number').style.backgroundColor = '#007bff4d';
-        }
-        , 3000);
+        setTimer(3);
+        
+        const countdown = setInterval(() => {
+            setTimer((prev) => {
+                if (prev === 0) {
+                    setDeleteAccountQuestion(false);
+                    clearInterval(countdown);
+                }
+                return prev - 1;
+            });
+        }, 1000);
+        
+        return () => clearInterval(countdown);
     }
-  }, [deleteAccountQuestion]);
+}, [deleteAccountQuestion]);
 
   return (
     <div className="users-page">
@@ -79,9 +93,30 @@ const Users = () => {
                     ) :
                       (<div className="delete-card-question">
                         <div className="delete-card-question-wrapper">
-                                <div className="delete-timer">
-                                    <span className="delete-timer-number"> 3 </span>
-                                </div>
+                        <div
+                                className="delete-timer"
+                                style={{
+                                    backgroundColor: getBackgroundColor(timer),
+                                    borderRadius: "50%",
+                                    width: "50px",
+                                    height: "50px",
+                                    display: "flex",
+                                    marginBottom: "20px",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                }}
+                            >
+                                <span
+                                    className="delete-timer-number"
+                                    style={{
+                                        fontSize: "20px",
+                                        color: "white",
+                                        fontWeight: "bold",
+                                    }}
+                                >
+                                    {timer}
+                                </span>
+                            </div>
                         <p>Are you sure you want to delete user?</p>
                         <div className="delete-card-btns">
                         <button className="delete-card-btn" onClick={() => deleteUser(userToDelete)}>
