@@ -6,7 +6,7 @@ export const fetchMe = async () => {
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
-    url: 'https://cardsservice.onrender.com/users/'+jwtDecode(localStorage.getItem('token'))._id,
+    url: 'https://cardsservice-production.up.railway.app/users/'+jwtDecode(localStorage.getItem('token'))._id,
     headers: { 
       'x-auth-token': localStorage.getItem('token'),
     },
@@ -24,7 +24,7 @@ export const fetchAllCards = async () => {
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
-    url: 'https://cardsservice.onrender.com/cards',
+    url: 'https://cardsservice-production.up.railway.app/cards',
   };
   try {
     let response = await axios.request(config);
@@ -39,7 +39,7 @@ export const likeSomeCard = async (id) => {
   let config = {
     method: 'patch',
     maxBodyLength: Infinity,
-    url: `https://cardsservice.onrender.com/cards/${id}`,
+    url: `https://cardsservice-production.up.railway.app/cards/${id}`,
     headers: { 
       'x-auth-token': localStorage.getItem('token'),
     }
@@ -59,7 +59,7 @@ export const fetchAllLikedCards = async () => {
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
-    url: 'https://cardsservice.onrender.com/cards/',
+    url: 'https://cardsservice-production.up.railway.app/cards/',
   };
   try {
     let response = await axios.request(config);
@@ -75,7 +75,7 @@ export const fetchAllMyCards = async () => {
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
-    url: 'https://cardsservice.onrender.com/cards/my-cards',
+    url: 'https://cardsservice-production.up.railway.app/cards/my-cards',
     headers: { 
       'x-auth-token': localStorage.getItem('token'),
     },
@@ -93,7 +93,7 @@ export const getCardById = async (id) => {
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
-    url: `https://cardsservice.onrender.com/cards/${id}`,
+    url: `https://cardsservice-production.up.railway.app/cards/${id}`,
   };
   try {
     let response = await axios.request(config);
@@ -108,7 +108,7 @@ export const updateCard = async (id, values) => {
   let config = {
     method: 'put',
     maxBodyLength: Infinity,
-    url: `https://cardsservice.onrender.com/cards/${id}`,
+    url: `https://cardsservice-production.up.railway.app/cards/${id}`,
     headers: {
       'x-auth-token': localStorage.getItem('token'),
     },
@@ -126,7 +126,7 @@ export const createCard = async (values) => {
   let config = {
     method: 'post',
     maxBodyLength: Infinity,
-    url: 'https://cardsservice.onrender.com/cards',
+    url: 'https://cardsservice-production.up.railway.app/cards',
     headers: { 
       'x-auth-token': localStorage.getItem('token'),
     },
@@ -145,7 +145,7 @@ export const upadateUser = async (values) => {
   let config = {
     method: 'put',
     maxBodyLength: Infinity,
-    url: `https://cardsservice.onrender.com/users/${jwtDecode(localStorage.getItem('token'))._id}`,
+    url: `https://cardsservice-production.up.railway.app/users/${jwtDecode(localStorage.getItem('token'))._id}`,
     headers: { 
       'x-auth-token': localStorage.getItem('token'),
     },
@@ -165,7 +165,7 @@ export const deleteCard = async (id) => {
   let config = {
     method: 'delete',
     maxBodyLength: Infinity,
-    url: `https://cardsservice.onrender.com/cards/${id}`,
+    url: `https://cardsservice-production.up.railway.app/cards/${id}`,
     headers: {
       'x-auth-token': localStorage.getItem('token'),
     },
@@ -184,7 +184,7 @@ export const deleteAccount = async () => {
   let config = {
     method: 'delete',
     maxBodyLength: Infinity,
-    url: `https://cardsservice.onrender.com/users/${jwtDecode(localStorage.getItem('token'))._id}`,
+    url: `https://cardsservice-production.up.railway.app/users/${jwtDecode(localStorage.getItem('token'))._id}`,
     headers: {
       'x-auth-token': localStorage.getItem('token'),
     },
@@ -202,7 +202,7 @@ export const deleteAccountById = async (id) => {
   let config = {
     method: 'delete',
     maxBodyLength: Infinity,
-    url: `https://cardsservice.onrender.com/users/${id}`,
+    url: `https://cardsservice-production.up.railway.app/users/${id}`,
     headers: {
       'x-auth-token': localStorage.getItem('token'),
     },
@@ -220,7 +220,7 @@ export const fetchAllUsers = async () => {
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
-    url: 'https://cardsservice.onrender.com/users',
+    url: 'https://cardsservice-production.up.railway.app/users',
     headers: {
       'x-auth-token': localStorage.getItem('token'),
     },
